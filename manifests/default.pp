@@ -1,8 +1,7 @@
-exec { "apt-update":
-    command => "/usr/bin/apt-get update",
-}
+Exec["apt-update"] -> Package <| |>
 
 $base = [ "htop", "pydf", "screen" ]
+
 package { $base:
 	  ensure   => 'latest',
 	}
@@ -15,6 +14,9 @@ file { '/home/vagrant/.screenrc':
 	require => Package['screen'],
 }
 
+exec { "apt-update":
+    command => "/usr/bin/apt-get update",
+}
 
 class { '::mysql::server':
   root_password => 'root',
