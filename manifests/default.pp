@@ -1,7 +1,10 @@
+exec { "apt-update":
+    command => "/usr/bin/apt-get update",
+}
+
 $base = [ "htop", "pydf", "screen" ]
 package { $base:
 	  ensure   => 'latest',
-    require => Exec['apt-get update'],
 	}
 
 file { '/home/vagrant/.screenrc':
@@ -18,3 +21,14 @@ class { '::mysql::server':
 }
 
 class { '::mysql::server::account_security': }
+
+#class { 'apt':
+#    always_apt_update               => true,
+#    disable_keys                    => undef,
+#    proxy_host                      => false,
+#    proxy_port                      => '8080',
+#    purge_sources_list              => false,
+#    purge_sources_list_d            => false,
+#    purge_preferences_d             => false,
+#    update_timeout                  => undef
+#}
