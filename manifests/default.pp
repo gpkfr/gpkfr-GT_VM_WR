@@ -1,6 +1,7 @@
 $base = [ "htop", "pydf", "screen" ]
 package { $base:
-	  ensure => 'latest',
+	  ensure   => 'latest',
+    require => Exec['apt-get update'],
 	}
 
 file { '/home/vagrant/.screenrc':
