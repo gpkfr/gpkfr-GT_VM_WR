@@ -18,6 +18,16 @@ exec { "apt-update":
     command => "/usr/bin/apt-get update",
 }
 
+  include apt
+
+  apt::source { 'dotdeb':
+    location   => 'http://packages.dotdeb.org',
+    release    => 'wheezy-php55',
+    repos      => 'all',
+    key        => '89DF5277',
+    key_source => 'http://www.dotdeb.org/dotdeb.gpg',
+ }
+
 class { '::mysql::server':
   root_password => 'root',
 }
@@ -34,3 +44,4 @@ class { '::mysql::server::account_security': }
 #    purge_preferences_d             => false,
 #    update_timeout                  => undef
 #}
+
