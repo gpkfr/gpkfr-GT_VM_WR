@@ -1,6 +1,8 @@
 Exec["apt-update"] -> Package <| |>
 
 $base = [ "htop", "pydf", "screen" ]
+$nginx = "nginx-light"
+#$fpm = [ "php5-fpm", "nginx-light" ]
 
 package { $base:
 	  ensure   => 'latest',
@@ -26,7 +28,25 @@ exec { "apt-update":
     repos      => 'all',
     key        => '89DF5277',
     key_source => 'http://www.dotdeb.org/dotdeb.gpg',
- }
+ }->package { $nginx:
+              ensure => 'latest' 
+              }->file { '/etc/nginx/sites-available/default':
+                        source => '/vagrant/files/nginx/default',
+                        owner  => 'root',
+                        group  => 'root',
+                        mode   => '644',
+                }->service { 'nginx':
+                           ensure => 'running' }
+include phpfpm
+
+phpfpm::pool { 'www':
+      ensure => 'absent',
+             }->phpfpm::pool { 'vagrant': 
+                  listen => '/var/run/php5-fpm_vagrant.sock',
+                  user   => 'vagrant',
+                  group  => 'vagrant',
+                }
+
 
 class { '::mysql::server':
   root_password => 'root',
