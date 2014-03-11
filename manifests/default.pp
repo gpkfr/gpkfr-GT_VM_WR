@@ -1,12 +1,21 @@
 Exec["apt-update"] -> Package <| |>
 
-$base = [ "htop", "pydf", "screen" ]
 $nginx = "nginx-light"
+$base = [ "htop", "pydf", "screen", $nginx, "php5-cli", "php5-mcrypt" ]
 #$fpm = [ "php5-fpm", "nginx-light" ]
+include apt
 
-package { $base:
+apt::source { 'dotdeb':
+    location   => 'http://packages.dotdeb.org',
+    release    => 'wheezy-php55',
+    repos      => 'all',
+    key        => '89DF5277',
+    key_source => 'http://www.dotdeb.org/dotdeb.gpg',
+ }->package { $base:
 	  ensure   => 'latest',
-	}
+    require =>  Exec [ 'apt-update'] 	
+ }
+
 
 file { '/home/vagrant/.screenrc':
 	source	=> '/vagrant/files/screenrc',
@@ -20,22 +29,13 @@ exec { "apt-update":
     command => "/usr/bin/apt-get update",
 }
 
-  include apt
-
-  apt::source { 'dotdeb':
-    location   => 'http://packages.dotdeb.org',
-    release    => 'wheezy-php55',
-    repos      => 'all',
-    key        => '89DF5277',
-    key_source => 'http://www.dotdeb.org/dotdeb.gpg',
- }->package { $nginx:
-              ensure => 'latest' 
-              }->file { '/etc/nginx/sites-available/default':
-                        source => '/vagrant/files/nginx/default',
-                        owner  => 'root',
-                        group  => 'root',
-                        mode   => '644',
-                }->service { 'nginx':
+file { '/etc/nginx/sites-available/default':
+                        source  => '/vagrant/files/nginx/default',
+                        owner   => 'root',
+                        group   => 'root',
+                        mode    => '644',
+                        require => Package [ $nginx ],
+     }->service { 'nginx':
                            ensure => 'running' }
 include phpfpm
 
@@ -46,6 +46,11 @@ phpfpm::pool { 'www':
                   user   => 'vagrant',
                   group  => 'vagrant',
                 }
+                
+                #                ->package{ 'php5-mcrypt':
+                #  ensure  => 'latest',
+                #  require => Exec['apt-update'],
+                #}
 
 
 class { '::mysql::server':
@@ -54,14 +59,4 @@ class { '::mysql::server':
 
 class { '::mysql::server::account_security': }
 
-#class { 'apt':
-#    always_apt_update               => true,
-#    disable_keys                    => undef,
-#    proxy_host                      => false,
-#    proxy_port                      => '8080',
-#    purge_sources_list              => false,
-#    purge_sources_list_d            => false,
-#    purge_preferences_d             => false,
-#    update_timeout                  => undef
-#}
 
