@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "wheezy"
-  config.vm.box_url = "https://www.dropbox.com/s/ddvomxk3tm0wa4i/vagrant-debian71-x64.box"
+  config.vm.box_url = "http://vbox.imelbox.com.s3.amazonaws.com/vagrant-debian71-x64.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -24,8 +24,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provider "vmware_fusion" do |v|
-      v.vmx["memsize"] = "1024"
-      v.vmx["numvcpus"] = "2"
+      v.vmx["memsize"] = "4096"
+      v.vmx["numvcpus"] = "4"
   end
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
