@@ -42,9 +42,12 @@ include phpfpm
 phpfpm::pool { 'www':
       ensure => 'absent',
              }->phpfpm::pool { 'vagrant': 
-                  listen => '/var/run/php5-fpm_vagrant.sock',
-                  user   => 'vagrant',
-                  group  => 'vagrant',
+                  listen       => '/var/run/php5-fpm_vagrant.sock',
+                  user         => 'vagrant',
+                  group        => 'vagrant',
+                  listen_owner => 'vagrant',
+                  listen_group => 'vagrant',
+                  listen_mode  => 0666,
                 }
                 
                 #                ->package{ 'php5-mcrypt':
