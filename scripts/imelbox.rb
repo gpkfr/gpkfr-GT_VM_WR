@@ -22,6 +22,12 @@ class Imelbox
     # Configure Port Forwarding
     config.vm.network :forwarded_port, guest: 80, host: 8080
 
+    # Configure The Public Key For SSH Access
+    config.vm.provision "shell" do |s|
+      s.inline = "echo $1 | tee -a /home/vagrant/.ssh/authorized_keys"
+      s.args = [File.read(settings["authorize"])]
+    end
+
     # Register All Of The Configured Shared Folders
     settings["folders"].each do |folder|
       config.vm.synced_folder folder["map"], folder["to"]
