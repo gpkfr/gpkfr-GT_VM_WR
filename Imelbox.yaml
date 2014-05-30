@@ -1,17 +1,16 @@
 ---
-ip: "192.168.10.10"
 memory: "4096"
 cpus: "4"
 
-authorize: /Users/guillaume/.ssh/id_rsa.pub
+authorize: /Users/Replace_me/.ssh/id_rsa.pub
 
 keys:
-    - /Users/guillaume/.ssh/id_rsa
+    - /Users/Replace_me/.ssh/id_rsa
 
 folders:
-    - map: /Users/guillaume/Documents/git/IbX/dashboard
-      to: /vagrant/www
+    - map: /Users/Replace_me/Local_PATH
+      to: /home/vagrant/REMOTE_DEST
 
 sites:
-    - servername: dashboard.local
-      docroot: /vagrant/www/public
+    - servername: servername.local
+      docroot: /home/vagrant/DOCROOT
