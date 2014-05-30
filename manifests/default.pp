@@ -66,4 +66,5 @@ class { '::mysql::server':
 
 class { '::mysql::server::account_security': }
 
-
+#Install composer
+class { ['php::composer', 'php::composer::auto_update']: }
