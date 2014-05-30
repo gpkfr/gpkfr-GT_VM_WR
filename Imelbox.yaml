@@ -1,0 +1,17 @@
+---
+ip: "192.168.10.10"
+memory: "4096"
+cpus: "4"
+
+authorize: /Users/guillaume/.ssh/id_rsa.pub
+
+keys:
+    - /Users/guillaume/.ssh/id_rsa
+
+folders:
+    - map: /Users/guillaume/Documents/git/IbX/dashboard
+      to: /vagrant/www
+
+sites:
+    - servername: dashboard.local
+      docroot: /vagrant/www/public

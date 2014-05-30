@@ -1,8 +1,13 @@
 Exec["apt-update"] -> Package <| |>
 
+exec { "apt-update":
+    command => "/usr/bin/apt-get update",
+}
+
 $nginx = "nginx-light"
 $base = [ "htop", "pydf", "screen", $nginx, "php5-cli", "php5-mcrypt" ]
-#$fpm = [ "php5-fpm", "nginx-light" ]
+
+#Configure dotdeb repo.
 include apt
 
 apt::source { 'dotdeb':
@@ -25,10 +30,9 @@ file { '/home/vagrant/.screenrc':
 	require => Package['screen'],
 }
 
-exec { "apt-update":
-    command => "/usr/bin/apt-get update",
-}
 
+
+/*
 file { '/etc/nginx/sites-available/default':
                         source  => '/vagrant/files/nginx/default',
                         owner   => 'root',
@@ -36,7 +40,10 @@ file { '/etc/nginx/sites-available/default':
                         mode    => '644',
                         require => Package [ $nginx ],
      }->service { 'nginx':
-                           ensure => 'running' }
+                   ensure => 'running' }
+*/
+
+#Install & Configure php-fpm
 include phpfpm
 
 phpfpm::pool { 'www':
@@ -49,12 +56,9 @@ phpfpm::pool { 'www':
                   listen_group => 'vagrant',
                   listen_mode  => 0666,
                 }
-                
-                #                ->package{ 'php5-mcrypt':
-                #  ensure  => 'latest',
-                #  require => Exec['apt-update'],
-                #}
 
+
+#Install & Configure Mysql_server
 
 class { '::mysql::server':
   root_password => 'root',
