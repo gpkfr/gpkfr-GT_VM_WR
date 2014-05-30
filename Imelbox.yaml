@@ -4,13 +4,13 @@ cpus: "4"
 
 authkeys:
     - ./files/vagrant.pub
-    - /Users/guillaume/Documents/vagrant/vmbox4dev/files/vagrant.pub
+    - /Users/guillaume/.ssh/id_rsa.pub
 
 keys:
     - /Users/guillaume/.ssh/id_rsa
 
 folders:
-    - map: /Users/guillaume/Documents/git/IbX
+    - map: /Users/guillaume/Documents/git/IbX/dashboard
       to: /home/vagrant/www
 
 sites:
