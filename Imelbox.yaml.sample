@@ -2,7 +2,8 @@
 memory: "4096"
 cpus: "4"
 
-authorize: /Users/Replace_me/.ssh/id_rsa.pub
+authkeys:
+    - ./files/vagrant.pub
 
 keys:
     - ./files/vagrant.pub

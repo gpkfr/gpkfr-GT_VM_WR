@@ -23,10 +23,10 @@ class Imelbox
     config.vm.network :forwarded_port, guest: 80, host: 8080
 
     # Configure The Public Key For SSH Access
-    settings["authorized_keys"].each do |authorized_key|
+    settings["authkeys"].each do |authkey|
       config.vm.provision "shell" do |s|
         s.inline = "echo $1 | tee -a /home/vagrant/.ssh/authorized_keys"
-        s.args = [File.read(settings["authorized_key"])]
+        s.args = [File.read(authkey)]
       end
     end
 
