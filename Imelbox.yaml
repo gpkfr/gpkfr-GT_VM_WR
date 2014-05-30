@@ -3,10 +3,10 @@ memory: "4096"
 cpus: "4"
 
 authkeys:
+    - ./files/vagrant.pub
     - /Users/guillaume/Documents/vagrant/vmbox4dev/files/vagrant.pub
 
 keys:
-    - ./files/vagrant.pub
     - /Users/guillaume/.ssh/id_rsa
 
 folders:
