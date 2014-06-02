@@ -13,3 +13,9 @@
 [submodule "modules/php"]
 	path = modules/php
 	url = git@github.com:jippi/puppet-php.git
+[submodule "modules/wget"]
+	path = modules/wget
+	url = git://github.com/maestrodev/puppet-wget.git
+[submodule "modules/nodejs"]
+	path = modules/nodejs
+	url = git://github.com/willdurand/puppet-nodejs.git
