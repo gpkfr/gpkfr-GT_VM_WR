@@ -6,9 +6,7 @@ class Imelbox
   def Imelbox.configure(config,settings)
     #Configure the Box
     config.vm.box = "ibx-wheezy64_vb"
-    #config.vm.box_url = "http://gt-adminsys.s3.amazonaws.com/box/wheezy_vb_20140530.box"
-    #config.vm.box = "wheezy"
-    #config.vm.box_url = "http://vbox.imelbox.com.s3.amazonaws.com/vagrant-debian71-x64.box"
+    config.vm.box_url = "http://gt-adminsys.s3.amazonaws.com/box/ibx-wheezy64_vb.box"
 
 #    server_ip = settings["ip"] ||= "192.168.10.10"
 
