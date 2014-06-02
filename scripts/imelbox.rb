@@ -5,19 +5,32 @@
 class Imelbox
   def Imelbox.configure(config,settings)
     #Configure the Box
-    config.vm.box = "wheezy"
-    config.vm.box_url = "http://vbox.imelbox.com.s3.amazonaws.com/vagrant-debian71-x64.box"
+    config.vm.box = "ibx-wheezy64-vb"
+    #config.vm.box_url = "http://gt-adminsys.s3.amazonaws.com/box/wheezy_vb_20140530.box"
+    #config.vm.box = "wheezy"
+    #config.vm.box_url = "http://vbox.imelbox.com.s3.amazonaws.com/vagrant-debian71-x64.box"
 
 #    server_ip = settings["ip"] ||= "192.168.10.10"
 
     #Configure A private Network
     #config.vm.network :private_network, ip: settings["ip"] ||= "192.168.10.10"
 
-    # Configure A Few VirtualBox Settings
-    config.vm.provider "vmware_fusion" do |v|
+    # Configure A Few VmWare-Fusion Settings
+    config.vm.provider "vmware_fusion" do |v, override|
+      override.vm.box = "wheezy"
+      override.vm.box_url = "http://vbox.imelbox.com.s3.amazonaws.com/vagrant-debian71-x64.box"
       v.vmx["memsize"] = settings["memory"] ||= "2048"
       v.vmx["numvcpus"] = settings["cpus"] ||= "1"
     end
+
+    # Configure A Few VirtualBox Settings
+    config.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", settings["memory"] ||= "2048"]
+      vb.customize ["modifyvm", :id, "--cpus", settings["cpus"] ||= "1"]
+    #  vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    #  vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    end
+
 
     # Configure Port Forwarding
     config.vm.network :forwarded_port, guest: 80, host: 8080
