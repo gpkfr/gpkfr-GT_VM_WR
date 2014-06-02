@@ -5,7 +5,7 @@
 class Imelbox
   def Imelbox.configure(config,settings)
     #Configure the Box
-    config.vm.box = "ibx-wheezy64-vb"
+    config.vm.box = "ibx-wheezy64_vb"
     #config.vm.box_url = "http://gt-adminsys.s3.amazonaws.com/box/wheezy_vb_20140530.box"
     #config.vm.box = "wheezy"
     #config.vm.box_url = "http://vbox.imelbox.com.s3.amazonaws.com/vagrant-debian71-x64.box"
@@ -27,8 +27,8 @@ class Imelbox
     config.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", settings["memory"] ||= "2048"]
       vb.customize ["modifyvm", :id, "--cpus", settings["cpus"] ||= "1"]
-    #  vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-    #  vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     end
 
 

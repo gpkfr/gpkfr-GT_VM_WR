@@ -61,10 +61,9 @@ phpfpm::pool { 'www':
 #Install & Configure Mysql_server
 
 class { '::mysql::server':
-  root_password => 'root',
+  root_password    => 'root',
+  override_options =>  {'mysqld' => { 'max_connetcions' => '1024' } }
 }
-
-class { '::mysql::server::account_security': }
 
 #Install composer
 class { ['php::composer', 'php::composer::auto_update']: }
