@@ -41,6 +41,15 @@ class Imelbox
       end
     end
 
+    # Copy The SSH Private Keys To The Box
+    settings["keys"].each do |key|
+      config.vm.provision "shell" do |s|
+        s.privileged = false
+        s.inline = "echo \"$1\" > /home/vagrant/.ssh/$2 && chmod 600 /home/vagrant/.ssh/$2"
+        s.args = [File.read(key), key.split('/').last]
+      end
+    end
+
     # Register All Of The Configured Shared Folders
     settings["folders"].each do |folder|
       config.vm.synced_folder folder["map"], folder["to"]
