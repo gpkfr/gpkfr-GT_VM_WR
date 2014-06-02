@@ -30,18 +30,12 @@ file { '/home/vagrant/.screenrc':
 	require => Package['screen'],
 }
 
-
-
-/*
-file { '/etc/nginx/sites-available/default':
-                        source  => '/vagrant/files/nginx/default',
-                        owner   => 'root',
-                        group   => 'root',
-                        mode    => '644',
-                        require => Package [ $nginx ],
-     }->service { 'nginx':
-                   ensure => 'running' }
-*/
+file { '/home/vagrant/.bash_aliases':
+  source => '/vagrant/files/bash_aliases',
+  owner  => 'vagrant',
+  group  => 'vagrant',
+  mode   => '644',
+}
 
 #Install & Configure php-fpm
 include phpfpm
