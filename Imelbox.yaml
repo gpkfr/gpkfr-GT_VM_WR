@@ -7,7 +7,7 @@ authkeys:
     - /Users/guillaume/.ssh/id_rsa.pub
 
 keys:
-    - /Users/guillaume/.ssh/id_rsa
+    - /Users/guillaume/id_rsa
 
 folders:
     - map: /Users/guillaume/Documents/git/IbX/dashboard
@@ -17,5 +17,5 @@ sites:
     - servername: dashboard.local
       docroot: /home/vagrant/www/public
 
-manifest: "default.pp"
+manifest: "webreader.pp"
 

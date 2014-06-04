@@ -61,12 +61,12 @@ class Imelbox
       puppet.manifest_file  = settings["manifest"] ||= "default.pp"
     end
     #Install All The Configured Nginx Sites
-    settings["sites"].each do |site|
-      config.vm.provision "shell" do |s|
-        s.inline = "bash /vagrant/scripts/serve.sh $1 $2"
-        s.args = [site["servername"], site["docroot"]]
-      end
-    end
+#    settings["sites"].each do |site|
+#      config.vm.provision "shell" do |s|
+#        s.inline = "bash /vagrant/scripts/serve.sh $1 $2"
+#        s.args = [site["servername"], site["docroot"]]
+#      end
+#    end
 
   end
 end
