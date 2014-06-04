@@ -1,6 +1,6 @@
 ---
-memory: "4096"
-cpus: "4"
+memory: "2048"
+cpus: "2"
 
 authkeys:
     - ./files/vagrant.pub
@@ -16,4 +16,6 @@ folders:
 sites:
     - servername: dashboard.local
       docroot: /home/vagrant/www/public
+
+manifest: "default.pp"
 

@@ -58,7 +58,7 @@ class Imelbox
     #Provision with puppet
     config.vm.provision :puppet, :module_path => "modules" do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.manifest_file  = "default.pp"
+      puppet.manifest_file  = settings["manifest"] ||= "default.pp"
     end
     #Install All The Configured Nginx Sites
     settings["sites"].each do |site|
