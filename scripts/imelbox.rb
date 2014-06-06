@@ -4,6 +4,7 @@
 
 class Imelbox
   def Imelbox.configure(config,settings)
+    config.ssh.shell = "bash -s"
     #Configure the Box
     config.vm.box = "ibx-wheezy64_vb"
     config.vm.box_url = "http://gt-adminsys.s3.amazonaws.com/box/ibx-wheezy64_vb.box"
@@ -55,18 +56,24 @@ class Imelbox
       config.vm.synced_folder folder["map"], folder["to"]
     end
 
+    config.vm.provision "shell" do |s|
+      s.inline = "bash /vagrant/scripts/init_node.sh $1"
+      s.args = settings["manifest"] ||= "webreader.pp"
+    end
+
+    #Install All The Configured Nginx Sites
+    settings["sites"].each do |site|
+      config.vm.provision "shell" do |s|
+        s.inline = "bash /vagrant/scripts/serve_node.sh $1 $2 $3 $4 $5 $6 $7 webreader.pp"
+        s.args = [site["script_name"], site["node_port"], site["server_name"], site["wruser"], site["wrgrp"], site ["nodeapp_dir"], site["root_dir"]]
+      end
+    end
+
     #Provision with puppet
     config.vm.provision :puppet, :module_path => "modules" do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.manifest_file  = settings["manifest"] ||= "default.pp"
+      puppet.manifest_file  = settings["manifest"] ||= "webreader.pp"
     end
-    #Install All The Configured Nginx Sites
-#    settings["sites"].each do |site|
-#      config.vm.provision "shell" do |s|
-#        s.inline = "bash /vagrant/scripts/serve.sh $1 $2"
-#        s.args = [site["servername"], site["docroot"]]
-#      end
-#    end
 
   end
 end
