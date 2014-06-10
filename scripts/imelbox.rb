@@ -38,7 +38,7 @@ class Imelbox
     settings["authkeys"].each do |authkey|
       config.vm.provision "shell" do |s|
         s.inline = "echo $1 | tee -a /home/vagrant/.ssh/authorized_keys"
-        s.args = [File.read(authkey)]
+        s.args = [File.read(File.expand_path(authkey))]
       end
     end
 
@@ -47,7 +47,7 @@ class Imelbox
       config.vm.provision "shell" do |s|
         s.privileged = false
         s.inline = "echo \"$1\" > /home/vagrant/.ssh/$2 && chmod 600 /home/vagrant/.ssh/$2"
-        s.args = [File.read(key), key.split('/').last]
+        s.args = [File.read(File.expand_path(key)), key.split('/').last]
       end
     end
 

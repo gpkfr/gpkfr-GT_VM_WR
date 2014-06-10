@@ -4,10 +4,10 @@ cpus: "1"
 
 authkeys:
     - ./files/vagrant.pub
-    - /Users/guillaume/.ssh/id_rsa.pub
+    - ~/.ssh/id_rsa.pub
 
 keys:
-    - /Users/guillaume/id_rsa
+    - ~/id_rsa
 
 folders:
     - map: /Users/guillaume/Documents/git/GT/Wr1
@@ -24,4 +24,3 @@ sites:
 
 
 manifest: "webreader.pp"
-
