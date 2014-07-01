@@ -10,10 +10,11 @@ webreader::vhost { '$3':
   wruser      => '$4',
   wrgrp       => '$5',
   nodeapp_dir => '$6',
-  root_dir    => '$7',
+  server_js   => '$7
+  root_dir    => '$8',
   vagrant     => true
   }
 
 "
 
-echo "$block" >> "/vagrant/manifests/$8"
+echo "$block" >> "/vagrant/manifests/$9"
