@@ -10,7 +10,7 @@ webreader::vhost { '$3':
   wruser      => '$4',
   wrgrp       => '$5',
   nodeapp_dir => '$6',
-  server_js   => '$7
+  server_js   => '$7',
   root_dir    => '$8',
   vagrant     => true
   }

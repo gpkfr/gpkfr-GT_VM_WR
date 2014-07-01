@@ -64,7 +64,7 @@ class Imelbox
     #Install All The Configured Nginx Sites
     settings["sites"].each do |site|
       config.vm.provision "shell" do |s|
-        s.inline = "bash /vagrant/scripts/serve_node.sh $1 $2 $3 $4 $5 $6 $7 $8"
+        s.inline = "bash /vagrant/scripts/serve_node.sh $1 $2 $3 $4 $5 $6 $7 $8 $9"
         s.args = [site["script_name"], site["node_port"], site["server_name"], site["wruser"], site["wrgrp"], site ["nodeapp_dir"], site["server_js"] ||= "server.js" ,site["root_dir"], settings["manifest"] ||= "webreader.pp"]
       end
     end
