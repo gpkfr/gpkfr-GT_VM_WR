@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 buffer="
-class { 'webreader': 
-  bypass_node => false,
+class {
+  'webreader':
+    bypass_node    => false,
 }
 
 "
