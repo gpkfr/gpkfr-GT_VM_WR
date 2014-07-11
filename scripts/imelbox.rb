@@ -56,6 +56,10 @@ class Imelbox
       config.vm.synced_folder folder["map"], folder["to"]
     end
 
+    ##################
+    #Webreader Stuff #
+    ##################
+    #
     config.vm.provision "shell" do |s|
       s.inline = "bash /vagrant/scripts/init_node.sh $1"
       s.args = settings["manifest"] ||= "webreader.pp"
@@ -69,10 +73,13 @@ class Imelbox
       end
     end
 
-    #Provision with puppet
+    #########################
+    # Provision with puppet #
+    #########################
+    #
     config.vm.provision :puppet, :module_path => "modules" do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.manifest_file  = settings["manifest"] ||= "webreader.pp"
+      puppet.manifest_file  = settings["manifest"] ||= "default.pp"
     end
 
   end
