@@ -16,8 +16,8 @@ class Imelbox
 
     # Configure A Few VmWare-Fusion Settings
     config.vm.provider "vmware_fusion" do |v, override|
-      override.vm.box = "wheezy"
-      override.vm.box_url = "http://vbox.imelbox.com.s3.amazonaws.com/vagrant-debian71-x64.box"
+      override.vm.box = "wheezy64_fr"
+      override.vm.box_url = "http://gt-adminsys.s3.amazonaws.com/box/vmware/wheezy64_fr.box"
       v.vmx["memsize"] = settings["memory"] ||= "2048"
       v.vmx["numvcpus"] = settings["cpus"] ||= "1"
     end
