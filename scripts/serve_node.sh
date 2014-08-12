@@ -14,9 +14,9 @@ webreader::vhost { '$3':
   root_dir       => '$8',
   vagrant        => true,
   bucket_s3      => '$9',
-  awsaccessKeyId => '$10',
+  awsaccessKeyId => '${10}',
   }
 
 "
 
-echo "$block" >> "/vagrant/manifests/$11"
+echo "$block" >> "/vagrant/manifests/${11}"
