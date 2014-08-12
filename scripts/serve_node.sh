@@ -5,16 +5,18 @@ block="
 # $1
 
 webreader::vhost { '$3':
-  script_name => '$1',
-  node_port   => '$2',
-  wruser      => '$4',
-  wrgrp       => '$5',
-  nodeapp_dir => '$6',
-  server_js   => '$7',
-  root_dir    => '$8',
-  vagrant     => true
+  script_name    => '$1',
+  node_port      => '$2',
+  wruser         => '$4',
+  wrgrp          => '$5',
+  nodeapp_dir    => '$6',
+  server_js      => '$7',
+  root_dir       => '$8',
+  vagrant        => true,
+  bucket_s3      => '$9',
+  awsaccessKeyId => '$10',
   }
 
 "
 
-echo "$block" >> "/vagrant/manifests/$9"
+echo "$block" >> "/vagrant/manifests/$11"

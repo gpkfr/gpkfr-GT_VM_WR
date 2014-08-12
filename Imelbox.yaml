@@ -10,7 +10,7 @@ keys:
     - ~/id_rsa
 
 folders:
-    - map: /Users/guillaume/Documents/git/GT/Wr1
+    - map: /Users/guillaume/Documents/git/GT/wr2
       to: /home/vagrant/www
 
 sites:
@@ -19,9 +19,10 @@ sites:
       server_name: test.local
       wruser: vagrant
       wrgrp: vagrant
-      nodeapp_dir: /home/vagrant/www/wr/
+      nodeapp_dir: /home/vagrant/www/
       server_js: dist/server.js
       root_dir: /home/vagrant/www
-
+      bucket_s3: gt-media-default.s3-eu-west-1.amazonaws.com
+      awsaccessKeyId: AKIAIKWIOCTNVWEGP5LA
 
 manifest: "webreader.pp"
