@@ -2,3 +2,4 @@
 manifests/webreader.pp
 .s3cfg
 /*.conf
+Imelbox.yaml

@@ -1,19 +1,28 @@
 ---
-memory: "4096"
-cpus: "4"
+memory: "3072"
+cpus: "1"
 
 authkeys:
     - ./files/vagrant.pub
+    - ~/.ssh/id_rsa.pub
 
 keys:
-    - ./files/vagrant.pub
-    - /Users/Replace_me/.ssh/id_rsa
-
+    - ~/.ssh/id_rsa
 
 folders:
-    - map: /Users/Replace_me/Local_PATH
-      to: /home/vagrant/REMOTE_DEST
+    - map: ~/Documents/git/GT/wr2
+      to: /home/vagrant/www
 
 sites:
-    - servername: servername.local
-      docroot: /home/vagrant/DOCROOT
+    - script_name: wr
+      node_port: "3000"
+      server_name: test.local
+      wruser: vagrant
+      wrgrp: vagrant
+      nodeapp_dir: /home/vagrant/www/
+      server_js: dist/server.js
+      root_dir: /home/vagrant/www
+      bucket_s3: gt-media-default.s3-eu-west-1.amazonaws.com
+      awsaccessKeyId: AKIAIKWIOCTNVWEGP5LA
+
+manifest: "webreader.pp"
