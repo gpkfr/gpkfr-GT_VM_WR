@@ -1,2 +1,4 @@
 /.vagrant
 manifests/webreader.pp
+.s3cfg
+/*.conf
